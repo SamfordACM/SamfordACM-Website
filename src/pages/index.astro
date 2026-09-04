@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import { path } from '../lib/url';
 
 // Show only events that have not happened yet, soonest first.
 const now = new Date();
@@ -21,7 +22,7 @@ const dateFmt = new Intl.DateTimeFormat('en-US', {
     We build things, learn together, and connect students with the wider computing world.
   </p>
   <p class="mt-6">
-    <a href="/join" class="inline-block rounded bg-brand-600 px-5 py-2.5 font-medium text-white hover:bg-brand-700">
+    <a href={path('/join')} class="inline-block rounded bg-brand-600 px-5 py-2.5 font-medium text-white hover:bg-brand-700">
       Join the chapter
     </a>
   </p>
@@ -42,6 +43,6 @@ const dateFmt = new Intl.DateTimeFormat('en-US', {
         ))}
       </ul>
     )}
-    <p class="mt-6"><a href="/events" class="text-brand-600 hover:underline">All events &rarr;</a></p>
+    <p class="mt-6"><a href={path('/events')} class="text-brand-600 hover:underline">All events &rarr;</a></p>
   </section>
 </Base>

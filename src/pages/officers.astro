@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import { path } from '../lib/url';
 
 const officers = (await getCollection('officers'))
   .sort((a, b) => a.data.order - b.data.order);
@@ -17,7 +18,7 @@ const officers = (await getCollection('officers'))
       <li class="rounded border border-neutral-200 p-5">
         {officer.data.photo && (
           <img
-            src={officer.data.photo}
+            src={path(officer.data.photo)}
             alt=""
             width="96"
             height="96"

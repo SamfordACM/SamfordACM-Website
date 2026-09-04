@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { path } from '../lib/url';
 
 // Paste the Google Form "embed" URL here (Send > <> > copy the src value) and the
 // form renders inline. Until then the page shows a fallback with no dead iframe.
@@ -16,7 +17,7 @@ const SIGNUP_FORM_EMBED_URL: string | null = null;
   <h2 class="mt-10 text-2xl font-semibold tracking-tight">How to get involved</h2>
   <ol class="mt-4 max-w-2xl list-decimal space-y-2 pl-5 text-neutral-700">
     <li>Fill out the interest form below so we can add you to the mailing list.</li>
-    <li>Show up to any meeting &mdash; see the <a href="/events" class="text-brand-600 hover:underline">events page</a>.</li>
+    <li>Show up to any meeting &mdash; see the <a href={path('/events')} class="text-brand-600 hover:underline">events page</a>.</li>
     <li>Optionally, register as a national ACM member for journal and conference access.</li>
   </ol>
 
@@ -31,7 +32,7 @@ const SIGNUP_FORM_EMBED_URL: string | null = null;
     ) : (
       <p class="rounded border border-dashed border-neutral-300 p-5 text-neutral-600">
         Interest form coming soon. In the meantime, email us from the
-        <a href="/contact" class="text-brand-600 hover:underline"> contact page</a>.
+        <a href={path('/contact')} class="text-brand-600 hover:underline"> contact page</a>.
       </p>
     )}
   </div>

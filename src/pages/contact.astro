@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { path } from '../lib/url';
 
 // Single source of truth for the chapter's public contact points.
 const CHAPTER_EMAIL = 'acm@samford.edu'; // TODO: confirm or replace
@@ -38,7 +39,7 @@ const SOCIALS = [
     <div>
       <dt class="text-sm font-medium text-neutral-500">Officers</dt>
       <dd class="mt-1">
-        <a href="/officers" class="text-brand-600 hover:underline">Reach an officer directly &rarr;</a>
+        <a href={path('/officers')} class="text-brand-600 hover:underline">Reach an officer directly &rarr;</a>
       </dd>
     </div>
   </dl>
