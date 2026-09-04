@@ -1,39 +1,74 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
 import { path } from '../lib/url';
 
-// Paste the Google Form "embed" URL here (Send > <> > copy the src value) and the
-// form renders inline. Until then the page shows a fallback with no dead iframe.
+// Paste the Google Form embed URL here (Send > <> > copy the src value) and the
+// form renders inline. Until then the page shows a fallback, not a dead iframe.
 const SIGNUP_FORM_EMBED_URL: string | null = null;
+
+const steps = [
+  {
+    title: 'Tell us you are interested',
+    body: 'Fill out the form below so we can add you to the mailing list and let you know when we meet.',
+  },
+  {
+    title: 'Come to a meeting',
+    body: 'Show up to any meeting on the calendar. Nothing to sign, nothing to pay at the door.',
+  },
+  {
+    title: 'Register with national ACM',
+    body: 'Optional. A national membership adds journal and conference access on top of what the chapter does.',
+  },
+];
 ---
 
 <Base title="Join">
-  <h1 class="text-4xl font-bold tracking-tight">Join</h1>
-  <p class="mt-4 max-w-2xl text-neutral-600">
-    Membership is open to every Samford student, regardless of major or experience level.
-    There is no coding test at the door.
-  </p>
+  <PageHeader
+    title="Join"
+    lead="Membership is open to every Samford student, regardless of major or experience level. There is no coding test at the door."
+  />
 
-  <h2 class="mt-10 text-2xl font-semibold tracking-tight">How to get involved</h2>
-  <ol class="mt-4 max-w-2xl list-decimal space-y-2 pl-5 text-neutral-700">
-    <li>Fill out the interest form below so we can add you to the mailing list.</li>
-    <li>Show up to any meeting &mdash; see the <a href={path('/events')} class="text-brand-600 hover:underline">events page</a>.</li>
-    <li>Optionally, register as a national ACM member for journal and conference access.</li>
-  </ol>
+  <div class="mt-12 grid gap-12 lg:grid-cols-12">
+    <div class="lg:col-span-5">
+      <h2 class="text-xs font-semibold uppercase tracking-[0.14em] text-brand">
+        How to get involved
+      </h2>
+      <ol class="mt-6 space-y-7">
+        {steps.map((step, i) => (
+          <li class="flex gap-5">
+            <span class="font-display text-2xl leading-none text-rule">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div>
+              <h3 class="font-display text-lg">{step.title}</h3>
+              <p class="mt-1 leading-relaxed text-muted">{step.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
 
-  <div class="mt-10">
-    {SIGNUP_FORM_EMBED_URL ? (
-      <iframe
-        src={SIGNUP_FORM_EMBED_URL}
-        title="Membership interest form"
-        class="h-[900px] w-full rounded border border-neutral-200"
-        loading="lazy"
-      >Loading&hellip;</iframe>
-    ) : (
-      <p class="rounded border border-dashed border-neutral-300 p-5 text-neutral-600">
-        Interest form coming soon. In the meantime, email us from the
-        <a href={path('/contact')} class="text-brand-600 hover:underline"> contact page</a>.
-      </p>
-    )}
+    <div class="lg:col-span-7">
+      {SIGNUP_FORM_EMBED_URL ? (
+        <iframe
+          src={SIGNUP_FORM_EMBED_URL}
+          title="Membership interest form"
+          class="h-[900px] w-full border border-rule bg-white"
+          loading="lazy"
+        >Loading&hellip;</iframe>
+      ) : (
+        <div class="border border-dashed border-rule p-10 text-center">
+          <p class="font-display text-xl">Interest form coming soon.</p>
+          <p class="mx-auto mt-3 max-w-[26em] leading-relaxed text-muted">
+            In the meantime, email us and we will add you to the list by hand.
+          </p>
+          <a
+            href={path('/contact')}
+            class="mt-6 inline-block bg-brand px-7 py-3 text-[15px] font-medium text-white transition-colors hover:bg-brand-deep"
+          >Get in touch</a>
+        </div>
+      )}
+    </div>
   </div>
 </Base>

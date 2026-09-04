@@ -1,28 +1,76 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
 ---
 
 <Base title="About">
-  <h1 class="text-4xl font-bold tracking-tight">About</h1>
+  <PageHeader
+    title="About"
+    lead="The Samford University student chapter of the Association for Computing Machinery — the world's largest scientific and educational computing society."
+  />
 
-  <div class="mt-6 max-w-2xl space-y-4 text-neutral-700">
-    <p>
-      Samford ACM is the Samford University student chapter of the Association for Computing
-      Machinery, the world's largest scientific and educational computing society.
-    </p>
-    <p>
-      <!-- TODO: replace with the chapter's own description -- what you actually do,
-           who should join, what a typical meeting looks like. -->
-      Placeholder copy. Describe the chapter's mission, meeting cadence, and who is welcome
-      (hint: majors and non-majors alike).
-    </p>
+  <div class="mt-12 grid gap-12 lg:grid-cols-12">
+    <div class="lg:col-span-7">
+      <div class="max-w-[34em] space-y-5 text-lg leading-relaxed text-body">
+        <!-- TODO: replace with the chapter's own description. What a typical
+             meeting looks like, who should come, what you actually do. -->
+        <p>
+          Placeholder copy. Describe the chapter in your own words — what a
+          meeting looks like, what a new member walks into, and why someone
+          outside computer science might still want to be here.
+        </p>
+        <p>
+          Keep it short and specific. Two honest paragraphs beat a page of
+          mission statement.
+        </p>
+      </div>
+    </div>
+
+    <aside class="lg:col-span-5 lg:border-l lg:border-rule lg:pl-10">
+      <h2 class="text-xs font-semibold uppercase tracking-[0.14em] text-brand">
+        At a glance
+      </h2>
+      <dl class="mt-5 space-y-4 text-[15px]">
+        <div class="flex gap-4 border-b border-rule pb-4">
+          <dt class="w-28 shrink-0 text-subtle">Meetings</dt>
+          <dd>Weekly — [day and time]</dd>
+        </div>
+        <div class="flex gap-4 border-b border-rule pb-4">
+          <dt class="w-28 shrink-0 text-subtle">Where</dt>
+          <dd>[Building &amp; room]</dd>
+        </div>
+        <div class="flex gap-4 border-b border-rule pb-4">
+          <dt class="w-28 shrink-0 text-subtle">Open to</dt>
+          <dd>All Samford students, any major</dd>
+        </div>
+        <div class="flex gap-4">
+          <dt class="w-28 shrink-0 text-subtle">Dues</dt>
+          <dd>[Confirm before publishing]</dd>
+        </div>
+      </dl>
+    </aside>
   </div>
 
-  <h2 class="mt-12 text-2xl font-semibold tracking-tight">What we do</h2>
-  <ul class="mt-4 max-w-2xl list-disc space-y-2 pl-5 text-neutral-700">
-    <li>Technical talks and workshops</li>
-    <li>Project nights and hackathon teams</li>
-    <li>Industry and alumni connections</li>
-    <li>Peer support for coursework and internship hunting</li>
-  </ul>
+  <h2 class="mt-16 font-display text-3xl font-normal tracking-tight">What we do</h2>
+  <div class="mt-8 grid gap-12 sm:grid-cols-3">
+    <div>
+      <h3 class="font-display text-xl font-medium">Workshops</h3>
+      <p class="mt-2 leading-relaxed text-muted">
+        Git, the terminal, deploying something real — the tooling coursework
+        assumes you already know.
+      </p>
+    </div>
+    <div>
+      <h3 class="font-display text-xl font-medium">Project nights</h3>
+      <p class="mt-2 leading-relaxed text-muted">
+        Open room, open laptops. Hackathon teams form here most semesters.
+      </p>
+    </div>
+    <div>
+      <h3 class="font-display text-xl font-medium">Industry nights</h3>
+      <p class="mt-2 leading-relaxed text-muted">
+        Alumni and Birmingham engineers on what the job is actually like.
+      </p>
+    </div>
+  </div>
 </Base>

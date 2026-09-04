@@ -1,9 +1,23 @@
 ---
+import { path } from '../lib/url';
+
 const year = new Date().getFullYear();
+
+// Add or remove links here; empty entries simply don't render.
+const links: { label: string; href: string }[] = [
+  // { label: 'GitHub', href: 'https://github.com/SamfordACM' },
+  // { label: 'Instagram', href: 'https://instagram.com/...' },
+];
 ---
 
-<footer class="mt-16 border-t border-neutral-200">
-  <div class="mx-auto max-w-4xl px-6 py-8 text-sm text-neutral-500">
-    <p>&copy; {year} Samford ACM &mdash; Samford University student chapter of the Association for Computing Machinery.</p>
+<footer class="border-t border-rule">
+  <div class="mx-auto flex max-w-5xl flex-wrap gap-4 px-6 py-8 text-sm text-subtle sm:px-10">
+    <p class="mr-auto">&copy; {year} Samford ACM</p>
+    <div class="flex gap-6">
+      {links.map((l) => (
+        <a href={l.href} class="transition-colors hover:text-ink">{l.label}</a>
+      ))}
+      <a href={path('/contact')} class="transition-colors hover:text-ink">Contact</a>
+    </div>
   </div>
 </footer>

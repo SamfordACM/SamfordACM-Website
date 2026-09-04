@@ -1,9 +1,32 @@
 @import "tailwindcss";
 
-/* Chapter palette lives here so a future maintainer changes colors in one place. */
+/*
+ * Chapter design tokens. Change a value here and it propagates everywhere --
+ * this is the one file to edit for a palette or type change.
+ */
 @theme {
-  --color-brand-50: #fef2f3;
-  --color-brand-500: #b3272d;
-  --color-brand-600: #961f25;
-  --color-brand-700: #7a191e;
+  /* Type: a serif for display, a humanist sans for everything else. */
+  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Libre Franklin', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Warm paper-and-ink neutrals, not pure black on pure white. */
+  --color-paper: #fbfaf8;
+  --color-ink: #1c1a17;
+  --color-body: #4a443c;
+  --color-muted: #5c554c;
+  --color-subtle: #7a7268;
+  --color-rule: #e2ddd5;
+
+  /* Samford crimson, used as punctuation rather than decoration. */
+  --color-brand: #b3272d;
+  --color-brand-deep: #8f1f24;
+}
+
+/* Sensible defaults so page files carry layout classes, not boilerplate. */
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
 }

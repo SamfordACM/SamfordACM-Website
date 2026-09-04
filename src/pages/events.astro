@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 const now = new Date();
 const all = await getCollection('events');
@@ -11,29 +12,56 @@ const past = all
   .filter((e) => e.data.date < now)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const dateFmt = new Intl.DateTimeFormat('en-US', {
-  weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit',
+const month = new Intl.DateTimeFormat('en-US', { month: 'short' });
+const day = new Intl.DateTimeFormat('en-US', { day: '2-digit' });
+const weekdayTime = new Intl.DateTimeFormat('en-US', {
+  weekday: 'long', hour: 'numeric', minute: '2-digit',
+});
+const shortDate = new Intl.DateTimeFormat('en-US', {
+  month: 'long', day: 'numeric', year: 'numeric',
 });
 ---
 
 <Base title="Events">
-  <h1 class="text-4xl font-bold tracking-tight">Events</h1>
+  <PageHeader
+    title="Events"
+    lead="Meetings are open — you do not need to be a member to come to one."
+  />
 
-  <h2 class="mt-10 text-2xl font-semibold tracking-tight">Upcoming</h2>
+  <h2 class="mt-12 font-display text-3xl font-normal tracking-tight">Upcoming</h2>
+
   {upcoming.length === 0 ? (
-    <p class="mt-4 text-neutral-600">Nothing on the calendar yet.</p>
+    <p class="mt-6 border-t border-rule pt-6 text-body">
+      Nothing on the calendar right now — check back soon.
+    </p>
   ) : (
-    <ul class="mt-4 space-y-4">
-      {upcoming.map((event) => (
-        <li class="rounded border border-neutral-200 p-5">
-          <h3 class="text-lg font-medium">{event.data.title}</h3>
-          <p class="mt-1 text-sm text-neutral-600">
-            {dateFmt.format(event.data.date)} &middot; {event.data.location}
-          </p>
-          {event.data.rsvp && (
-            <p class="mt-3">
-              <a href={event.data.rsvp} class="text-brand-600 hover:underline">RSVP &rarr;</a>
+    <ul class="mt-6">
+      {upcoming.map((event, i) => (
+        <li
+          class:list={[
+            'flex flex-wrap items-baseline gap-x-8 gap-y-2 border-t border-rule py-7',
+            i === upcoming.length - 1 && 'border-b',
+          ]}
+        >
+          <div class="w-20 shrink-0">
+            <div class="text-xs uppercase tracking-[0.09em] text-subtle">
+              {month.format(event.data.date)}
+            </div>
+            <div class="font-display text-3xl leading-none">
+              {day.format(event.data.date)}
+            </div>
+          </div>
+          <div class="grow">
+            <h3 class="font-display text-2xl">{event.data.title}</h3>
+            <p class="mt-1 text-sm text-muted">
+              {weekdayTime.format(event.data.date)} &middot; {event.data.location}
             </p>
+          </div>
+          {event.data.rsvp && (
+            <a
+              href={event.data.rsvp}
+              class="shrink-0 text-sm text-brand hover:text-brand-deep"
+            >RSVP &rarr;</a>
           )}
         </li>
       ))}
@@ -42,12 +70,12 @@ const dateFmt = new Intl.DateTimeFormat('en-US', {
 
   {past.length > 0 && (
     <>
-      <h2 class="mt-12 text-2xl font-semibold tracking-tight">Past</h2>
-      <ul class="mt-4 space-y-2 text-neutral-600">
+      <h2 class="mt-16 font-display text-3xl font-normal tracking-tight">Past</h2>
+      <ul class="mt-6 divide-y divide-rule border-t border-rule">
         {past.map((event) => (
-          <li class="text-sm">
-            <span class="text-neutral-900">{event.data.title}</span>
-            {' '}&middot; {dateFmt.format(event.data.date)}
+          <li class="flex flex-wrap gap-x-6 gap-y-1 py-4 text-[15px]">
+            <span class="grow">{event.data.title}</span>
+            <span class="text-subtle">{shortDate.format(event.data.date)}</span>
           </li>
         ))}
       </ul>

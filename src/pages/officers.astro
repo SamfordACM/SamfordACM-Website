@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
 import { path } from '../lib/url';
 
 const officers = (await getCollection('officers'))
@@ -8,31 +9,37 @@ const officers = (await getCollection('officers'))
 ---
 
 <Base title="Officers">
-  <h1 class="text-4xl font-bold tracking-tight">Officers</h1>
-  <p class="mt-4 max-w-2xl text-neutral-600">
-    Reach out to any of us &mdash; we are happy to answer questions about the chapter.
-  </p>
+  <PageHeader
+    title="Officers"
+    lead="Reach out to any of us — we are happy to answer questions about the chapter."
+  />
 
-  <ul class="mt-8 grid gap-6 sm:grid-cols-2">
+  <ul class="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
     {officers.map((officer) => (
-      <li class="rounded border border-neutral-200 p-5">
-        {officer.data.photo && (
+      <li>
+        {officer.data.photo ? (
           <img
             src={path(officer.data.photo)}
             alt=""
-            width="96"
-            height="96"
-            class="mb-3 h-24 w-24 rounded-full object-cover"
+            width="112"
+            height="112"
+            class="mb-4 h-28 w-28 object-cover grayscale"
           />
+        ) : (
+          <div
+            class="mb-4 flex h-28 w-28 items-center justify-center border border-rule bg-white font-display text-3xl text-rule"
+            aria-hidden="true"
+          >{officer.data.name.charAt(0)}</div>
         )}
-        <h2 class="font-medium">{officer.data.name}</h2>
-        <p class="text-sm text-neutral-600">{officer.data.role}</p>
+        <h2 class="font-display text-xl">{officer.data.name}</h2>
+        <p class="mt-0.5 text-xs uppercase tracking-[0.09em] text-brand">
+          {officer.data.role}
+        </p>
         {officer.data.email && (
-          <p class="mt-2 text-sm">
-            <a href={`mailto:${officer.data.email}`} class="text-brand-600 hover:underline">
-              {officer.data.email}
-            </a>
-          </p>
+          <a
+            href={`mailto:${officer.data.email}`}
+            class="mt-2 inline-block text-sm text-muted underline decoration-rule underline-offset-4 transition-colors hover:text-ink"
+          >{officer.data.email}</a>
         )}
       </li>
     ))}

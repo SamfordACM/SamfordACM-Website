@@ -1,46 +1,67 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
 import { path } from '../lib/url';
 
 // Single source of truth for the chapter's public contact points.
-const CHAPTER_EMAIL = 'acm@samford.edu'; // TODO: confirm or replace
-const SOCIALS = [
+const CHAPTER_EMAIL = 'acm@samford.edu'; // TODO: confirm this address exists
+const SOCIALS: { label: string; href: string }[] = [
   // { label: 'Instagram', href: 'https://instagram.com/...' },
   // { label: 'Discord', href: 'https://discord.gg/...' },
-  // { label: 'GitHub', href: 'https://github.com/samford-acm' },
+  // { label: 'GitHub', href: 'https://github.com/SamfordACM' },
 ];
 ---
 
 <Base title="Contact">
-  <h1 class="text-4xl font-bold tracking-tight">Contact</h1>
-  <p class="mt-4 max-w-2xl text-neutral-600">
-    Questions about the chapter, speaking at a meeting, or sponsoring an event? Get in touch.
-  </p>
+  <PageHeader
+    title="Contact"
+    lead="Questions about the chapter, speaking at a meeting, or sponsoring an event? Get in touch."
+  />
 
-  <dl class="mt-8 space-y-6">
-    <div>
-      <dt class="text-sm font-medium text-neutral-500">Email</dt>
-      <dd class="mt-1">
-        <a href={`mailto:${CHAPTER_EMAIL}`} class="text-brand-600 hover:underline">{CHAPTER_EMAIL}</a>
-      </dd>
+  <div class="mt-12 grid gap-12 lg:grid-cols-12">
+    <div class="lg:col-span-7">
+      <dl class="space-y-6">
+        <div class="border-b border-rule pb-6">
+          <dt class="text-xs uppercase tracking-[0.09em] text-subtle">Email</dt>
+          <dd class="mt-2 font-display text-2xl">
+            <a
+              href={`mailto:${CHAPTER_EMAIL}`}
+              class="text-brand transition-colors hover:text-brand-deep"
+            >{CHAPTER_EMAIL}</a>
+          </dd>
+        </div>
+
+        {SOCIALS.length > 0 && (
+          <div class="border-b border-rule pb-6">
+            <dt class="text-xs uppercase tracking-[0.09em] text-subtle">Online</dt>
+            <dd class="mt-2 flex flex-wrap gap-6">
+              {SOCIALS.map((s) => (
+                <a href={s.href} class="text-brand hover:text-brand-deep">{s.label}</a>
+              ))}
+            </dd>
+          </div>
+        )}
+
+        <div>
+          <dt class="text-xs uppercase tracking-[0.09em] text-subtle">Officers</dt>
+          <dd class="mt-2">
+            <a
+              href={path('/officers')}
+              class="text-brand transition-colors hover:text-brand-deep"
+            >Reach an officer directly &rarr;</a>
+          </dd>
+        </div>
+      </dl>
     </div>
 
-    {SOCIALS.length > 0 && (
-      <div>
-        <dt class="text-sm font-medium text-neutral-500">Online</dt>
-        <dd class="mt-1 flex gap-4">
-          {SOCIALS.map((s) => (
-            <a href={s.href} class="text-brand-600 hover:underline">{s.label}</a>
-          ))}
-        </dd>
-      </div>
-    )}
-
-    <div>
-      <dt class="text-sm font-medium text-neutral-500">Officers</dt>
-      <dd class="mt-1">
-        <a href={path('/officers')} class="text-brand-600 hover:underline">Reach an officer directly &rarr;</a>
-      </dd>
-    </div>
-  </dl>
+    <aside class="lg:col-span-5 lg:border-l lg:border-rule lg:pl-10">
+      <p class="font-display text-xl italic leading-relaxed text-ink">
+        The fastest way to get an answer is to come to a meeting and ask.
+      </p>
+      <a
+        href={path('/events')}
+        class="mt-6 inline-block border-b border-rule pb-0.5 text-[15px] text-body transition-colors hover:text-ink"
+      >See the calendar &rarr;</a>
+    </aside>
+  </div>
 </Base>

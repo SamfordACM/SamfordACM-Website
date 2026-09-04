@@ -11,7 +11,7 @@ const events = defineCollection({
     date: z.coerce.date(),
     location: z.string(),
     // Optional so a placeholder event can go up before details are locked in.
-    rsvp: z.string().url().optional(),
+    rsvp: z.url().optional(),
   }),
 });
 
@@ -22,7 +22,7 @@ const officers = defineCollection({
     role: z.string(),
     // Controls display order on the Officers page: 1 = president, 2 = VP, etc.
     order: z.number(),
-    email: z.string().email().optional(),
+    email: z.email().optional(),
     photo: z.string().optional(),
   }),
 });
