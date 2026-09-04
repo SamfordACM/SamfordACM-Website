@@ -5,3 +5,7 @@ dist/
 .env
 .env.production
 npm-debug.log*
+
+# Design canvas: keep the .dc.html sources, not the generated bundle
+.design/*.html
+!.design/*.dc.html

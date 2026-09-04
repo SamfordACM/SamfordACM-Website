@@ -1,0 +1,38 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html",     "title": "A — Academic",  "x": 0,    "y": 0, "w": 1280, "h": 1520 },
+    { "file": "Terminal.dc.html", "title": "B — Terminal",  "x": 1360, "y": 0, "w": 1280, "h": 1360 },
+    { "file": "Campus.dc.html",   "title": "C — Campus",    "x": 2720, "y": 0, "w": 1280, "h": 1340 }
+  ],
+  "annotations": [
+    {
+      "id": "dir-a",
+      "x": 0,
+      "y": -196,
+      "w": 560,
+      "text": "A — ACADEMIC\nSerif display (Newsreader), warm paper background, crimson used sparingly as punctuation. Reads as a credible department site.\n\nWhy: ages well, looks legitimate to faculty and prospective sponsors, needs zero photography.\nTradeoff: quiet. Won't grab a freshman scrolling on their phone at the involvement fair."
+    },
+    {
+      "id": "dir-b",
+      "x": 1360,
+      "y": -196,
+      "w": 560,
+      "text": "B — TERMINAL\nDark, monospace, prompts and a log-style event list. Speaks directly to people who already write code.\n\nWhy: the most distinctive of the three, and the cheapest to keep looking good — no images to source ever.\nTradeoff: actively filters. A curious business major may read it as 'not for me', which cuts against recruiting."
+    },
+    {
+      "id": "dir-c",
+      "x": 2720,
+      "y": -196,
+      "w": 560,
+      "text": "C — CAMPUS\nBright, rounded, photo-led, recruiting-first. Big claim, membership count, faces.\n\nWhy: best at converting newcomers, and the friendliest to non-majors.\nTradeoff: it is only as good as its photos. Every grey [PHOTO] block is a real picture someone has to take and keep taking each year — that is the maintenance burden A and B don't have."
+    },
+    {
+      "id": "shared-note",
+      "x": 0,
+      "y": -320,
+      "w": 900,
+      "text": "Same content in all three — nav, tagline, Join CTA, three upcoming events, footer. Bracketed values like [##] and [Building & room] are placeholders, not real data. Each artboard has an accent-color chip above it if you want to see it in something other than Samford crimson."
+    }
+  ],
+  "launch": { "view": "canvas" }
+}
