@@ -6,13 +6,15 @@
  * has not been confirmed -- replace the value, don't just delete the brackets.
  */
 
-export const CHAPTER_EMAIL = '[acm@samford.edu — confirm this exists]';
+export const CHAPTER_EMAIL = 'dabbott1@samford.edu'; // TODO: swap for a role address
+// that survives officer turnover (acm@samford.edu) once the department sets one up.
 
 /** Public accounts. Comment a line out and it disappears everywhere at once. */
 export const SOCIALS: { label: string; href: string }[] = [
-  // { label: 'Discord',   href: 'https://discord.gg/[invite code]' },
-  // { label: 'Instagram', href: 'https://instagram.com/[handle]' },
-  // { label: 'LinkedIn',  href: 'https://linkedin.com/company/[slug]' },
+  { label: 'Discord', href: 'https://discord.gg/kH5YTczVbX' },
+  { label: 'Instagram', href: 'https://www.instagram.com/samfordacm/' },
+  // LinkedIn page pending identity verification -- uncomment once it resolves.
+  // { label: 'LinkedIn', href: 'https://linkedin.com/company/[slug]' },
 ];
 
 /** National ACM membership: encouraged for everyone, required for exec. */

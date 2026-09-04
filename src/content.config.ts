@@ -29,6 +29,11 @@ const events = defineCollection({
     }),
 });
 
+/**
+ * Officer profiles. Every field past `name`/`role`/`order` is optional, so a
+ * half-filled profile renders cleanly rather than leaving holes -- add what you
+ * have and fill the rest in later.
+ */
 const officers = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/officers' }),
   schema: z.object({
@@ -37,7 +42,13 @@ const officers = defineCollection({
     /** Display order: 1 = president, 2 = VP, and so on. */
     order: z.number(),
     email: z.email().optional(),
+    /** Path under public/, e.g. /officers/daniel-abbott.jpg */
     photo: z.string().optional(),
+    /** What they are into. Renders as tags. */
+    interests: z.array(z.string()).default([]),
+    github: z.url().optional(),
+    linkedin: z.url().optional(),
+    website: z.url().optional(),
   }),
 });
 

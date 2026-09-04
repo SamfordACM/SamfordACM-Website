@@ -1,11 +1,26 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { path } from '../lib/url';
 
 const officers = (await getCollection('officers'))
   .sort((a, b) => a.data.order - b.data.order);
+
+// Render each officer's Markdown body once, up front, so the template stays flat.
+const withBio = await Promise.all(
+  officers.map(async (officer) => {
+    const { Content } = await render(officer);
+    return { officer, Content, hasBio: (officer.body?.trim().length ?? 0) > 0 };
+  })
+);
+
+const profileLinks = (d: (typeof officers)[number]['data']) =>
+  [
+    d.github && { label: 'GitHub', href: d.github },
+    d.linkedin && { label: 'LinkedIn', href: d.linkedin },
+    d.website && { label: 'Website', href: d.website },
+  ].filter(Boolean) as { label: string; href: string }[];
 ---
 
 <Base title="Officers">
@@ -14,34 +29,66 @@ const officers = (await getCollection('officers'))
     lead="Reach out to any of us — we are happy to answer questions about the chapter."
   />
 
-  <ul class="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-    {officers.map((officer) => (
-      <li>
-        {officer.data.photo ? (
-          <img
-            src={path(officer.data.photo)}
-            alt=""
-            width="112"
-            height="112"
-            class="mb-4 h-28 w-28 object-cover grayscale"
-          />
-        ) : (
-          <div
-            class="mb-4 flex h-28 w-28 items-center justify-center border border-rule bg-white font-display text-3xl text-rule"
-            aria-hidden="true"
-          >{officer.data.name.charAt(0)}</div>
-        )}
-        <h2 class="font-display text-xl">{officer.data.name}</h2>
-        <p class="mt-0.5 text-xs uppercase tracking-[0.09em] text-brand">
-          {officer.data.role}
-        </p>
-        {officer.data.email && (
-          <a
-            href={`mailto:${officer.data.email}`}
-            class="mt-2 inline-block text-sm text-muted underline decoration-rule underline-offset-4 transition-colors hover:text-ink"
-          >{officer.data.email}</a>
-        )}
-      </li>
-    ))}
+  <ul class="mt-12 grid gap-x-10 gap-y-14 sm:grid-cols-2">
+    {withBio.map(({ officer, Content, hasBio }) => {
+      const links = profileLinks(officer.data);
+      return (
+        <li>
+          <div class="flex items-start gap-5">
+            {officer.data.photo ? (
+              <img
+                src={path(officer.data.photo)}
+                alt=""
+                width="96"
+                height="96"
+                class="h-24 w-24 shrink-0 object-cover"
+              />
+            ) : (
+              <div
+                class="flex h-24 w-24 shrink-0 items-center justify-center border border-rule bg-white font-display text-3xl text-rule"
+                aria-hidden="true"
+              >{officer.data.name.charAt(0)}</div>
+            )}
+            <div class="min-w-0">
+              <h2 class="font-display text-xl">{officer.data.name}</h2>
+              <p class="mt-0.5 text-xs uppercase tracking-[0.09em] text-brand">
+                {officer.data.role}
+              </p>
+              {officer.data.email && (
+                <a
+                  href={`mailto:${officer.data.email}`}
+                  class="mt-2 inline-block break-all text-sm text-muted underline decoration-rule underline-offset-4 transition-colors hover:text-ink"
+                >{officer.data.email}</a>
+              )}
+            </div>
+          </div>
+
+          {hasBio && (
+            <div class="mt-4 max-w-[34em] leading-relaxed text-muted">
+              <Content />
+            </div>
+          )}
+
+          {officer.data.interests.length > 0 && (
+            <ul class="mt-4 flex flex-wrap gap-2">
+              {officer.data.interests.map((interest) => (
+                <li class="border border-rule px-3 py-1 text-sm text-muted">{interest}</li>
+              ))}
+            </ul>
+          )}
+
+          {links.length > 0 && (
+            <div class="mt-4 flex flex-wrap gap-5">
+              {links.map((l) => (
+                <a
+                  href={l.href}
+                  class="border-b border-rule pb-0.5 text-sm text-body transition-colors hover:text-ink"
+                >{l.label}</a>
+              ))}
+            </div>
+          )}
+        </li>
+      );
+    })}
   </ul>
 </Base>
