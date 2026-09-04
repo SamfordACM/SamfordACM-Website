@@ -9,7 +9,7 @@ const { upcoming, planned, past } = await groupEvents();
 <Base title="Events">
   <PageHeader
     title="Events"
-    lead="We do not run on a fixed weekly schedule — events are announced as they are set, so check here or follow us online."
+    lead="We are setting this year's schedule now. Everything below is confirmed to happen — dates go up here as soon as they are locked in."
   />
 
   {upcoming.length > 0 && (
@@ -48,7 +48,7 @@ const { upcoming, planned, past } = await groupEvents();
     <>
       <h2 class="mt-14 font-display text-3xl font-normal tracking-tight">Planned</h2>
       <p class="mt-3 max-w-[38em] text-body">
-        Confirmed to happen, dates still being locked in.
+        Confirmed to happen. Dates are being finalized with the exec team — follow us on Discord to hear first.
       </p>
       <ul class="mt-6">
         {planned.map((event) => (

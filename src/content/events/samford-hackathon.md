@@ -1,7 +1,7 @@
 ---
 title: Samford Hackathon
-window: "[Dates TBD]"
-location: "[Building & room]"
+window: "Date to be announced"
+location: "Samford University"
 featured: true
 ---
 
