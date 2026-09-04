@@ -3,6 +3,11 @@ import Base from '../layouts/Base.astro';
 import { path } from '../lib/url';
 import { AREAS, HERO_PHOTO } from '../lib/chapter';
 import { groupEvents, fmt, describeWhen } from '../lib/events';
+import { hasPublicFile } from '../lib/assets';
+
+// Save the official ACM logo to public/acm-logo.png and it renders itself.
+const ACM_LOGO = '/acm-logo.png';
+const showLogo = hasPublicFile(ACM_LOGO);
 
 const { upcoming, planned } = await groupEvents();
 
@@ -42,6 +47,15 @@ const agenda = [...upcoming, ...planned].slice(0, 4);
     </div>
 
     <aside class="flex flex-col justify-end gap-6 lg:col-span-5 lg:border-l lg:border-rule lg:pl-10">
+      {showLogo && (
+        <img
+          src={path(ACM_LOGO)}
+          alt="Association for Computing Machinery"
+          class="w-full max-w-[260px] self-start"
+          loading="eager"
+        />
+      )}
+
       {HERO_PHOTO ? (
         <img
           src={path(HERO_PHOTO)}
