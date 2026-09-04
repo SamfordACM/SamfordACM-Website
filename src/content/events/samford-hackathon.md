@@ -1,6 +1,6 @@
 ---
 title: Samford Hackathon
-window: "Date to be announced"
+window: "TBD"
 location: "Samford University"
 featured: true
 ---

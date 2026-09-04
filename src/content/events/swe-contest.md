@@ -1,6 +1,6 @@
 ---
 title: Software Engineering Contest
-window: "Date to be announced"
+window: "TBD"
 location: "Samford University"
 featured: true
 ---

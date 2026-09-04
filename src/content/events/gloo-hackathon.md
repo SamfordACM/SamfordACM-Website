@@ -1,6 +1,6 @@
 ---
 title: Gloo Hackathon
-window: "Date to be announced"
+window: "TBD"
 featured: true
 ---
 
