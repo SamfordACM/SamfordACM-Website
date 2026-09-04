@@ -1,12 +1,13 @@
 ---
 import { path, normalize } from '../lib/url';
 
+// Join is deliberately not in this list -- it renders as the button at the far
+// right, so the primary action is never just another link in the row.
 const links = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/events', label: 'Events' },
   { href: '/officers', label: 'Officers' },
-  { href: '/join', label: 'Join' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -14,23 +15,31 @@ const current = normalize(Astro.url.pathname);
 ---
 
 <header class="border-b border-rule">
-  <nav class="mx-auto flex max-w-5xl flex-wrap items-baseline gap-x-7 gap-y-2 px-6 py-6 sm:px-10">
+  <nav class="mx-auto flex max-w-5xl flex-wrap items-center gap-x-7 gap-y-3 px-6 py-5 sm:px-10">
     <a
       href={path('/')}
-      class="mr-auto font-display text-xl font-semibold tracking-tight text-ink"
+      class="font-display text-xl font-semibold tracking-tight text-ink"
     >Samford <span class="text-brand">ACM</span></a>
 
-    {links.map(({ href, label }) => (
-      <a
-        href={path(href)}
-        aria-current={current === href ? 'page' : undefined}
-        class:list={[
-          'text-sm transition-colors hover:text-ink',
-          current === href
-            ? 'border-b-2 border-brand pb-0.5 text-ink'
-            : 'text-muted',
-        ]}
-      >{label}</a>
-    ))}
+    <div class="flex flex-wrap items-center gap-x-7 gap-y-2 sm:ml-6">
+      {links.map(({ href, label }) => (
+        <a
+          href={path(href)}
+          aria-current={current === href ? 'page' : undefined}
+          class:list={[
+            'text-sm transition-colors hover:text-ink',
+            current === href
+              ? 'border-b-2 border-brand pb-0.5 text-ink'
+              : 'text-muted',
+          ]}
+        >{label}</a>
+      ))}
+    </div>
+
+    <a
+      href={path('/join')}
+      aria-current={current === '/join' ? 'page' : undefined}
+      class="ml-auto bg-brand px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-deep"
+    >Join</a>
   </nav>
 </header>

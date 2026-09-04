@@ -28,13 +28,26 @@ export const PRESENCE_SIGNUP_URL =
 export const NATIONAL_ACM_URL = 'https://www.acm.org/membership/student';
 
 /**
- * What the chapter covers. ACM is the only computing club at Samford, so this
- * list is doing real work: it tells a visitor whose interest lives here.
+ * What a visitor finds here. Mixes the subject areas we cover with what
+ * actually happens at an event -- both are reasons to walk in the door.
  */
 export const AREAS = [
   'Artificial intelligence',
   'Cybersecurity',
   'Software engineering',
   'Computer engineering',
-  'Business continuity',
+  'Workshops',
+  'Guest speakers',
+  'Competitions',
+  'Food and prizes',
 ];
+
+/**
+ * Hero photo, shown above the pull quote on the homepage.
+ * Drop a file in public/photos/ and set this to e.g. '/photos/kickoff.jpg'.
+ * Left null, the page renders a placeholder frame instead.
+ */
+export const HERO_PHOTO: string | null = null;
+
+/** Faculty advisor -- the continuity anchor as officers turn over. */
+export const ADVISOR = 'Greg Kawell';

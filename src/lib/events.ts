@@ -18,11 +18,15 @@ export async function groupEvents(now = new Date()) {
       return a.data.title.localeCompare(b.data.title);
     });
 
+  // A multi-day event stays "upcoming" until its end date passes, so a
+  // month-long hackathon does not vanish the day after it opens.
+  const endsAt = (e: Event) => e.data.endDate ?? e.data.date!;
+
   const upcoming = scheduled
-    .filter((e) => e.data.date! >= now)
+    .filter((e) => endsAt(e) >= now)
     .sort((a, b) => a.data.date!.valueOf() - b.data.date!.valueOf());
   const past = scheduled
-    .filter((e) => e.data.date! < now)
+    .filter((e) => endsAt(e) < now)
     .sort((a, b) => b.data.date!.valueOf() - a.data.date!.valueOf());
 
   return { upcoming, planned, past };
@@ -46,7 +50,22 @@ export const fmt = {
   weekdayTime: new Intl.DateTimeFormat('en-US', {
     weekday: 'long', hour: 'numeric', minute: '2-digit', timeZone: TIME_ZONE,
   }),
+  monthDay: new Intl.DateTimeFormat('en-US', {
+    month: 'long', day: 'numeric', timeZone: TIME_ZONE,
+  }),
   longDate: new Intl.DateTimeFormat('en-US', {
     month: 'long', day: 'numeric', year: 'numeric', timeZone: TIME_ZONE,
   }),
 };
+
+/**
+ * Human description of when an event happens. A single-day event shows its
+ * weekday and start time; a multi-day one shows a date range and no time,
+ * because "6:00 PM" is meaningless for something that runs for a month.
+ */
+export function describeWhen(event: Event): string {
+  const { date, endDate } = event.data;
+  if (!date) return event.data.window ?? '';
+  if (endDate) return `${fmt.monthDay.format(date)} – ${fmt.monthDay.format(endDate)}`;
+  return fmt.weekdayTime.format(date);
+}

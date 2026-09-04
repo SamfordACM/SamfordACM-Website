@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
-import { AREAS } from '../lib/chapter';
+import { AREAS, ADVISOR } from '../lib/chapter';
 ---
 
 <Base title="About">
@@ -15,9 +15,8 @@ import { AREAS } from '../lib/chapter';
       <div class="max-w-[34em] space-y-5 text-lg leading-relaxed text-body">
         <p>
           Because we are the only computing club at Samford, we are a wide tent
-          on purpose. Cybersecurity, software engineering, computer engineering,
-          business continuity — if your interest touches a computer, this is
-          where it lives.
+          on purpose. Cybersecurity, software engineering, computer engineering
+          — if your interest touches a computer, this is where it lives.
         </p>
         <p>
           We care a lot about what AI has changed. The gap between having an idea
@@ -52,7 +51,7 @@ import { AREAS } from '../lib/chapter';
         </div>
         <div class="flex gap-4">
           <dt class="w-28 shrink-0 text-subtle">Advisor</dt>
-          <dd>[Advisor name]</dd>
+          <dd>{ADVISOR}</dd>
         </div>
       </dl>
 
@@ -77,10 +76,10 @@ import { AREAS } from '../lib/chapter';
       </p>
     </div>
     <div>
-      <h3 class="font-display text-xl font-medium">Contests</h3>
+      <h3 class="font-display text-xl font-medium">Competitions</h3>
       <p class="mt-2 leading-relaxed text-muted">
-        A software engineering contest hosted on campus, open to students across
-        the department.
+        We enter national competitions and host our own. No technical experience
+        is required to take part.
       </p>
     </div>
     <div>

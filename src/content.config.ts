@@ -17,6 +17,8 @@ const events = defineCollection({
     .object({
       title: z.string(),
       date: z.coerce.date().optional(),
+      /** For multi-day events. The event counts as past once this passes. */
+      endDate: z.coerce.date().optional(),
       window: z.string().optional(),
       location: z.string().optional(),
       /** Link to a sign-up form so we know who is coming. */

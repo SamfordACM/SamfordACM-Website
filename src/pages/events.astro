@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
-import { groupEvents, fmt } from '../lib/events';
+import { groupEvents, fmt, describeWhen } from '../lib/events';
 
 const { upcoming, planned, past } = await groupEvents();
 ---
@@ -29,7 +29,7 @@ const { upcoming, planned, past } = await groupEvents();
             <div class="grow">
               <h3 class="font-display text-2xl">{event.data.title}</h3>
               <p class="mt-1 text-sm text-muted">
-                {fmt.weekdayTime.format(event.data.date!)}
+                {describeWhen(event)}
                 {event.data.location && <> &middot; {event.data.location}</>}
               </p>
             </div>
