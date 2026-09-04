@@ -32,7 +32,7 @@ jobs:
         run: |
           set -o pipefail
           if ! npm ci 2>&1 | tee /tmp/npm-ci.log; then
-            echo "::error title=npm ci failed::$(tail -c 2500 /tmp/npm-ci.log | tr '\n' '~')"
+            echo "::error title=npm ci head::$(head -c 2000 /tmp/npm-ci.log | tr '\n' '~')"
             exit 1
           fi
       - run: npm run build
