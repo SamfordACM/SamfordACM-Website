@@ -1,8 +1,29 @@
 {
   "artboards": [
-    { "file": "Main.dc.html",     "title": "A — Academic",  "x": 0,    "y": 0, "w": 1280, "h": 1520 },
-    { "file": "Terminal.dc.html", "title": "B — Terminal",  "x": 1360, "y": 0, "w": 1280, "h": 1360 },
-    { "file": "Campus.dc.html",   "title": "C — Campus",    "x": 2720, "y": 0, "w": 1280, "h": 1340 }
+    {
+      "file": "Main.dc.html",
+      "title": "A — Academic",
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 1780
+    },
+    {
+      "file": "Terminal.dc.html",
+      "title": "B — Terminal",
+      "x": 1360,
+      "y": 0,
+      "w": 1280,
+      "h": 1560
+    },
+    {
+      "file": "Campus.dc.html",
+      "title": "C — Campus",
+      "x": 2720,
+      "y": 0,
+      "w": 1280,
+      "h": 2000
+    }
   ],
   "annotations": [
     {
@@ -34,5 +55,7 @@
       "text": "Same content in all three — nav, tagline, Join CTA, three upcoming events, footer. Bracketed values like [##] and [Building & room] are placeholders, not real data. Each artboard has an accent-color chip above it if you want to see it in something other than Samford crimson."
     }
   ],
-  "launch": { "view": "canvas" }
+  "launch": {
+    "view": "canvas"
+  }
 }
