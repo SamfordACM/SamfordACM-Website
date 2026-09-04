@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Single source of truth for the chapter's public contact points.
+const CHAPTER_EMAIL = 'acm@samford.edu'; // TODO: confirm or replace
+const SOCIALS = [
+  // { label: 'Instagram', href: 'https://instagram.com/...' },
+  // { label: 'Discord', href: 'https://discord.gg/...' },
+  // { label: 'GitHub', href: 'https://github.com/samford-acm' },
+];
+---
+
+<Base title="Contact">
+  <h1 class="text-4xl font-bold tracking-tight">Contact</h1>
+  <p class="mt-4 max-w-2xl text-neutral-600">
+    Questions about the chapter, speaking at a meeting, or sponsoring an event? Get in touch.
+  </p>
+
+  <dl class="mt-8 space-y-6">
+    <div>
+      <dt class="text-sm font-medium text-neutral-500">Email</dt>
+      <dd class="mt-1">
+        <a href={`mailto:${CHAPTER_EMAIL}`} class="text-brand-600 hover:underline">{CHAPTER_EMAIL}</a>
+      </dd>
+    </div>
+
+    {SOCIALS.length > 0 && (
+      <div>
+        <dt class="text-sm font-medium text-neutral-500">Online</dt>
+        <dd class="mt-1 flex gap-4">
+          {SOCIALS.map((s) => (
+            <a href={s.href} class="text-brand-600 hover:underline">{s.label}</a>
+          ))}
+        </dd>
+      </div>
+    )}
+
+    <div>
+      <dt class="text-sm font-medium text-neutral-500">Officers</dt>
+      <dd class="mt-1">
+        <a href="/officers" class="text-brand-600 hover:underline">Reach an officer directly &rarr;</a>
+      </dd>
+    </div>
+  </dl>
+</Base>

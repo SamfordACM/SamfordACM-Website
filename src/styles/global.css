@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+/* Chapter palette lives here so a future maintainer changes colors in one place. */
+@theme {
+  --color-brand-50: #fef2f3;
+  --color-brand-500: #b3272d;
+  --color-brand-600: #961f25;
+  --color-brand-700: #7a191e;
+}

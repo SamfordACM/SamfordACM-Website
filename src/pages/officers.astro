@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const officers = (await getCollection('officers'))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Officers">
+  <h1 class="text-4xl font-bold tracking-tight">Officers</h1>
+  <p class="mt-4 max-w-2xl text-neutral-600">
+    Reach out to any of us &mdash; we are happy to answer questions about the chapter.
+  </p>
+
+  <ul class="mt-8 grid gap-6 sm:grid-cols-2">
+    {officers.map((officer) => (
+      <li class="rounded border border-neutral-200 p-5">
+        {officer.data.photo && (
+          <img
+            src={officer.data.photo}
+            alt=""
+            width="96"
+            height="96"
+            class="mb-3 h-24 w-24 rounded-full object-cover"
+          />
+        )}
+        <h2 class="font-medium">{officer.data.name}</h2>
+        <p class="text-sm text-neutral-600">{officer.data.role}</p>
+        {officer.data.email && (
+          <p class="mt-2 text-sm">
+            <a href={`mailto:${officer.data.email}`} class="text-brand-600 hover:underline">
+              {officer.data.email}
+            </a>
+          </p>
+        )}
+      </li>
+    ))}
+  </ul>
+</Base>

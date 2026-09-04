@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+// Show only events that have not happened yet, soonest first.
+const now = new Date();
+const upcoming = (await getCollection('events'))
+  .filter((e) => e.data.date >= now)
+  .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
+  .slice(0, 3);
+
+const dateFmt = new Intl.DateTimeFormat('en-US', {
+  weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit',
+});
+---
+
+<Base title="Home">
+  <h1 class="text-4xl font-bold tracking-tight">Samford ACM</h1>
+  <p class="mt-4 max-w-2xl text-lg text-neutral-600">
+    The Samford University student chapter of the Association for Computing Machinery.
+    We build things, learn together, and connect students with the wider computing world.
+  </p>
+  <p class="mt-6">
+    <a href="/join" class="inline-block rounded bg-brand-600 px-5 py-2.5 font-medium text-white hover:bg-brand-700">
+      Join the chapter
+    </a>
+  </p>
+
+  <section class="mt-14">
+    <h2 class="text-2xl font-semibold tracking-tight">Upcoming events</h2>
+    {upcoming.length === 0 ? (
+      <p class="mt-4 text-neutral-600">No events scheduled right now &mdash; check back soon.</p>
+    ) : (
+      <ul class="mt-4 space-y-4">
+        {upcoming.map((event) => (
+          <li class="rounded border border-neutral-200 p-4">
+            <h3 class="font-medium">{event.data.title}</h3>
+            <p class="mt-1 text-sm text-neutral-600">
+              {dateFmt.format(event.data.date)} &middot; {event.data.location}
+            </p>
+          </li>
+        ))}
+      </ul>
+    )}
+    <p class="mt-6"><a href="/events" class="text-brand-600 hover:underline">All events &rarr;</a></p>
+  </section>
+</Base>

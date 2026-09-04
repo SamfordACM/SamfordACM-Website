@@ -1,0 +1,29 @@
+---
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/events', label: 'Events' },
+  { href: '/officers', label: 'Officers' },
+  { href: '/join', label: 'Join' },
+  { href: '/contact', label: 'Contact' },
+];
+
+// Normalize so "/events/" and "/events" both mark the tab active.
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+---
+
+<header class="border-b border-neutral-200">
+  <nav class="mx-auto flex max-w-4xl flex-wrap items-center gap-x-6 gap-y-2 px-6 py-4">
+    <a href="/" class="mr-auto font-semibold tracking-tight">Samford ACM</a>
+    {links.map(({ href, label }) => (
+      <a
+        href={href}
+        aria-current={path === href ? 'page' : undefined}
+        class:list={[
+          'text-sm hover:text-brand-600',
+          path === href ? 'text-brand-600 font-medium' : 'text-neutral-600',
+        ]}
+      >{label}</a>
+    ))}
+  </nav>
+</header>
