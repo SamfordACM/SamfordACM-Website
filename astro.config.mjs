@@ -2,16 +2,12 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
-// ---------------------------------------------------------------------------
-// WHEN samfordacm.com IS PURCHASED, make exactly these two changes:
-//   1. site: 'https://samfordacm.com'
-//   2. base: '/'
-//   ...and re-create public/CNAME containing the single line: samfordacm.com
-// Every internal link goes through src/lib/url.ts, so nothing else needs to move.
-// ---------------------------------------------------------------------------
 export default defineConfig({
-  site: 'https://samfordacm.github.io',
-  base: '/SamfordACM-Website/',
+  // Live at the apex domain. `base` is '/' because the site is served from the
+  // domain root rather than a GitHub Pages project subpath. Internal links go
+  // through src/lib/url.ts, which reads these -- don't hardcode paths.
+  site: 'https://samfordacm.com',
+  base: '/',
   vite: {
     plugins: [tailwindcss()],
   },
