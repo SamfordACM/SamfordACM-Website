@@ -28,14 +28,25 @@ export async function groupEvents(now = new Date()) {
   return { upcoming, planned, past };
 }
 
+/**
+ * Campus time zone, pinned explicitly.
+ *
+ * Without this, dates format in the *build machine's* zone -- GitHub's runners
+ * are UTC, so a 6:00 PM event rendered as 11:00 PM on the deployed site, and a
+ * late-evening event would show on the wrong day. Always format through these.
+ */
+const TIME_ZONE = 'America/Chicago';
+
 export const fmt = {
-  month: new Intl.DateTimeFormat('en-US', { month: 'short' }),
-  day: new Intl.DateTimeFormat('en-US', { day: '2-digit' }),
-  time: new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit' }),
+  month: new Intl.DateTimeFormat('en-US', { month: 'short', timeZone: TIME_ZONE }),
+  day: new Intl.DateTimeFormat('en-US', { day: '2-digit', timeZone: TIME_ZONE }),
+  time: new Intl.DateTimeFormat('en-US', {
+    hour: 'numeric', minute: '2-digit', timeZone: TIME_ZONE,
+  }),
   weekdayTime: new Intl.DateTimeFormat('en-US', {
-    weekday: 'long', hour: 'numeric', minute: '2-digit',
+    weekday: 'long', hour: 'numeric', minute: '2-digit', timeZone: TIME_ZONE,
   }),
   longDate: new Intl.DateTimeFormat('en-US', {
-    month: 'long', day: 'numeric', year: 'numeric',
+    month: 'long', day: 'numeric', year: 'numeric', timeZone: TIME_ZONE,
   }),
 };
