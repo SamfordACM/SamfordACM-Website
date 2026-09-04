@@ -17,6 +17,13 @@ export const SOCIALS: { label: string; href: string }[] = [
   // { label: 'LinkedIn', href: 'https://linkedin.com/company/[slug]' },
 ];
 
+/**
+ * Official membership signup, through Samford's Bulldog Central (Presence).
+ * This is the roster of record -- institution-owned, so it outlives any officer.
+ */
+export const PRESENCE_SIGNUP_URL =
+  'https://samford.presence.io/organization/association-for-computing-machinery-acm';
+
 /** National ACM membership: encouraged for everyone, required for exec. */
 export const NATIONAL_ACM_URL = 'https://www.acm.org/membership/student';
 
