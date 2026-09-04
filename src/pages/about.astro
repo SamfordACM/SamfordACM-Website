@@ -1,27 +1,34 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
+import { AREAS } from '../lib/chapter';
 ---
 
 <Base title="About">
   <PageHeader
     title="About"
-    lead="The Samford University student chapter of the Association for Computing Machinery — the world's largest scientific and educational computing society."
+    lead="ACM is Samford's computing club — the student chapter of the Association for Computing Machinery, and the only club on campus for anything computer-related."
   />
 
   <div class="mt-12 grid gap-12 lg:grid-cols-12">
     <div class="lg:col-span-7">
       <div class="max-w-[34em] space-y-5 text-lg leading-relaxed text-body">
-        <!-- TODO: replace with the chapter's own description. What a typical
-             meeting looks like, who should come, what you actually do. -->
         <p>
-          Placeholder copy. Describe the chapter in your own words — what a
-          meeting looks like, what a new member walks into, and why someone
-          outside computer science might still want to be here.
+          Because we are the only computing club at Samford, we are a wide tent
+          on purpose. Cybersecurity, software engineering, computer engineering,
+          business continuity — if your interest touches a computer, this is
+          where it lives.
         </p>
         <p>
-          Keep it short and specific. Two honest paragraphs beat a page of
-          mission statement.
+          We care a lot about what AI has changed. The gap between having an idea
+          and building it has never been smaller, and a big part of what we do is
+          helping people cross it without needing years of coursework first.
+        </p>
+        <p>
+          <!-- TODO: your own words. What made you take this on, and what you want
+               the chapter to be by the end of the year. -->
+          This year is a rebuild. Say something here about where the chapter is
+          headed — this is the paragraph people read to decide whether to show up.
         </p>
       </div>
     </div>
@@ -32,44 +39,55 @@ import PageHeader from '../components/PageHeader.astro';
       </h2>
       <dl class="mt-5 space-y-4 text-[15px]">
         <div class="flex gap-4 border-b border-rule pb-4">
-          <dt class="w-28 shrink-0 text-subtle">Meetings</dt>
-          <dd>Weekly — [day and time]</dd>
-        </div>
-        <div class="flex gap-4 border-b border-rule pb-4">
-          <dt class="w-28 shrink-0 text-subtle">Where</dt>
-          <dd>[Building &amp; room]</dd>
+          <dt class="w-28 shrink-0 text-subtle">Dues</dt>
+          <dd>None — membership is free</dd>
         </div>
         <div class="flex gap-4 border-b border-rule pb-4">
           <dt class="w-28 shrink-0 text-subtle">Open to</dt>
           <dd>All Samford students, any major</dd>
         </div>
+        <div class="flex gap-4 border-b border-rule pb-4">
+          <dt class="w-28 shrink-0 text-subtle">Meetings</dt>
+          <dd>No fixed schedule — events are announced as they are set</dd>
+        </div>
         <div class="flex gap-4">
-          <dt class="w-28 shrink-0 text-subtle">Dues</dt>
-          <dd>[Confirm before publishing]</dd>
+          <dt class="w-28 shrink-0 text-subtle">Advisor</dt>
+          <dd>[Advisor name]</dd>
         </div>
       </dl>
+
+      <h2 class="mt-10 text-xs font-semibold uppercase tracking-[0.14em] text-brand">
+        What lives here
+      </h2>
+      <ul class="mt-4 flex flex-wrap gap-2">
+        {AREAS.map((area) => (
+          <li class="border border-rule px-3 py-1.5 text-sm text-muted">{area}</li>
+        ))}
+      </ul>
     </aside>
   </div>
 
   <h2 class="mt-16 font-display text-3xl font-normal tracking-tight">What we do</h2>
   <div class="mt-8 grid gap-12 sm:grid-cols-3">
     <div>
-      <h3 class="font-display text-xl font-medium">Workshops</h3>
+      <h3 class="font-display text-xl font-medium">Hackathons</h3>
       <p class="mt-2 leading-relaxed text-muted">
-        Git, the terminal, deploying something real — the tooling coursework
-        assumes you already know.
+        We enter them and, this year, we are hosting one at Samford. Teams form
+        here; you do not need to arrive with one.
       </p>
     </div>
     <div>
-      <h3 class="font-display text-xl font-medium">Project nights</h3>
+      <h3 class="font-display text-xl font-medium">Contests</h3>
       <p class="mt-2 leading-relaxed text-muted">
-        Open room, open laptops. Hackathon teams form here most semesters.
+        A software engineering contest hosted on campus, open to students across
+        the department.
       </p>
     </div>
     <div>
-      <h3 class="font-display text-xl font-medium">Industry nights</h3>
+      <h3 class="font-display text-xl font-medium">Building with AI</h3>
       <p class="mt-2 leading-relaxed text-muted">
-        Alumni and Birmingham engineers on what the job is actually like.
+        Sessions on getting real things built with modern tools — aimed at people
+        with ideas, not just people with experience.
       </p>
     </div>
   </div>

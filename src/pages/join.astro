@@ -2,73 +2,84 @@
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { path } from '../lib/url';
-
-// Paste the Google Form embed URL here (Send > <> > copy the src value) and the
-// form renders inline. Until then the page shows a fallback, not a dead iframe.
-const SIGNUP_FORM_EMBED_URL: string | null = null;
-
-const steps = [
-  {
-    title: 'Tell us you are interested',
-    body: 'Fill out the form below so we can add you to the mailing list and let you know when we meet.',
-  },
-  {
-    title: 'Come to a meeting',
-    body: 'Show up to any meeting on the calendar. Nothing to sign, nothing to pay at the door.',
-  },
-  {
-    title: 'Register with national ACM',
-    body: 'Optional. A national membership adds journal and conference access on top of what the chapter does.',
-  },
-];
+import { SOCIALS, NATIONAL_ACM_URL } from '../lib/chapter';
 ---
 
 <Base title="Join">
   <PageHeader
     title="Join"
-    lead="Membership is open to every Samford student, regardless of major or experience level. There is no coding test at the door."
+    lead="No dues, no application, no prerequisites. Membership is open to every Samford student regardless of major or experience."
   />
 
   <div class="mt-12 grid gap-12 lg:grid-cols-12">
-    <div class="lg:col-span-5">
-      <h2 class="text-xs font-semibold uppercase tracking-[0.14em] text-brand">
-        How to get involved
-      </h2>
-      <ol class="mt-6 space-y-7">
-        {steps.map((step, i) => (
-          <li class="flex gap-5">
-            <span class="font-display text-2xl leading-none text-rule">
-              {String(i + 1).padStart(2, '0')}
-            </span>
-            <div>
-              <h3 class="font-display text-lg">{step.title}</h3>
-              <p class="mt-1 leading-relaxed text-muted">{step.body}</p>
-            </div>
-          </li>
-        ))}
+    <div class="lg:col-span-7">
+      <ol class="space-y-8">
+        <li class="flex gap-5">
+          <span class="font-display text-2xl leading-none text-rule">01</span>
+          <div>
+            <h2 class="font-display text-xl">Get on the list</h2>
+            <p class="mt-1.5 max-w-[34em] leading-relaxed text-muted">
+              {SOCIALS.length > 0
+                ? 'Follow us and join the Discord — that is where events get announced first.'
+                : 'Our Discord and Instagram are where events get announced first. Links are going up here shortly.'}
+            </p>
+            {SOCIALS.length > 0 && (
+              <div class="mt-4 flex flex-wrap gap-3">
+                {SOCIALS.map((s) => (
+                  <a
+                    href={s.href}
+                    class="border border-rule px-4 py-2 text-sm text-muted transition-colors hover:border-brand hover:text-brand"
+                  >{s.label}</a>
+                ))}
+              </div>
+            )}
+          </div>
+        </li>
+
+        <li class="flex gap-5">
+          <span class="font-display text-2xl leading-none text-rule">02</span>
+          <div>
+            <h2 class="font-display text-xl">Come to something</h2>
+            <p class="mt-1.5 max-w-[34em] leading-relaxed text-muted">
+              We do not meet on a fixed weekly schedule, so watch the
+              <a href={path('/events')} class="text-brand hover:text-brand-deep"> events page</a>.
+              Most events have a sign-up so we know how many people to plan for —
+              but nobody gets turned away for not signing up.
+            </p>
+          </div>
+        </li>
+
+        <li class="flex gap-5">
+          <span class="font-display text-2xl leading-none text-rule">03</span>
+          <div>
+            <h2 class="font-display text-xl">Consider national ACM <span class="text-subtle">(optional)</span></h2>
+            <p class="mt-1.5 max-w-[34em] leading-relaxed text-muted">
+              A national membership adds journal and conference access on top of
+              what the chapter does. We encourage it and our exec team carries it,
+              but it is not required to be a member here.
+            </p>
+            <a
+              href={NATIONAL_ACM_URL}
+              class="mt-3 inline-block border-b border-rule pb-0.5 text-sm text-body transition-colors hover:text-ink"
+            >ACM student membership &rarr;</a>
+          </div>
+        </li>
       </ol>
     </div>
 
-    <div class="lg:col-span-7">
-      {SIGNUP_FORM_EMBED_URL ? (
-        <iframe
-          src={SIGNUP_FORM_EMBED_URL}
-          title="Membership interest form"
-          class="h-[900px] w-full border border-rule bg-white"
-          loading="lazy"
-        >Loading&hellip;</iframe>
-      ) : (
-        <div class="border border-dashed border-rule p-10 text-center">
-          <p class="font-display text-xl">Interest form coming soon.</p>
-          <p class="mx-auto mt-3 max-w-[26em] leading-relaxed text-muted">
-            In the meantime, email us and we will add you to the list by hand.
-          </p>
-          <a
-            href={path('/contact')}
-            class="mt-6 inline-block bg-brand px-7 py-3 text-[15px] font-medium text-white transition-colors hover:bg-brand-deep"
-          >Get in touch</a>
-        </div>
-      )}
-    </div>
+    <aside class="lg:col-span-5 lg:border-l lg:border-rule lg:pl-10">
+      <p class="font-display text-xl italic leading-relaxed text-ink">
+        The chapter is being rebuilt this year. Getting in now means shaping what
+        it becomes.
+      </p>
+      <p class="mt-5 leading-relaxed text-muted">
+        That is not a figure of speech — officer roles, event ideas and the
+        direction of the club are all genuinely open right now.
+      </p>
+      <a
+        href={path('/contact')}
+        class="mt-6 inline-block bg-brand px-7 py-3 text-[15px] font-medium text-white transition-colors hover:bg-brand-deep"
+      >Get in touch</a>
+    </aside>
   </div>
 </Base>

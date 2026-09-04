@@ -2,14 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { path } from '../lib/url';
-
-// Single source of truth for the chapter's public contact points.
-const CHAPTER_EMAIL = 'acm@samford.edu'; // TODO: confirm this address exists
-const SOCIALS: { label: string; href: string }[] = [
-  // { label: 'Instagram', href: 'https://instagram.com/...' },
-  // { label: 'Discord', href: 'https://discord.gg/...' },
-  // { label: 'GitHub', href: 'https://github.com/SamfordACM' },
-];
+import { CHAPTER_EMAIL, SOCIALS } from '../lib/chapter';
 ---
 
 <Base title="Contact">
