@@ -117,14 +117,14 @@ const agenda = [...upcoming, ...planned].slice(0, 4);
             <li class="flex flex-wrap items-baseline gap-x-8 gap-y-2 border-t border-rule py-6 last:border-b">
               <div class="w-20 shrink-0">
                 <div class="text-xs uppercase tracking-[0.09em] text-subtle">
-                  {event.data.date ? fmt.month.format(event.data.date) : 'Date'}
+                  {event.data.date ? fmt.month(event.data.date) : 'Date'}
                 </div>
                 <div
                   class:list={[
                     'font-display leading-none',
                     event.data.date ? 'text-3xl' : 'text-3xl text-subtle',
                   ]}
-                >{event.data.date ? fmt.day.format(event.data.date) : 'TBD'}</div>
+                >{event.data.date ? fmt.day(event.data.date) : 'TBD'}</div>
               </div>
 
               <div class="grow">

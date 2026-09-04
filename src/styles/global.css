@@ -1,32 +1,48 @@
 @import "tailwindcss";
 
 /*
- * Chapter design tokens. Change a value here and it propagates everywhere --
- * this is the one file to edit for a palette or type change.
+ * Design tokens, aligned to Samford University's Brand Identity Standards
+ * (Summer 2026). Change a value here and it propagates site-wide.
+ *
+ * Palette rules from the standard:
+ *   Navy is the preferred color on digital assets and websites, 50-80% of the
+ *   overall ratio. Red is capped at 40%, gray at 40%, and each secondary color
+ *   at 20%. So navy carries the page; red is punctuation, never the field.
+ *
+ * Type: the standard specifies Chronicle Deck (display) and Whitney (text),
+ * which are licensed commercial faces we cannot ship. It names Georgia and
+ * Tahoma as the sanctioned substitutes, "pre-installed on most devices" -- so
+ * the site uses those and loads no webfonts at all.
  */
 @theme {
-  /* Type: a serif for display, a humanist sans for everything else. */
-  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Libre Franklin', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-sans: Tahoma, Verdana, Geneva, sans-serif;
 
-  /* Warm paper-and-ink neutrals, not pure black on pure white. */
-  --color-paper: #fbfaf8;
-  --color-ink: #1c1a17;
-  --color-body: #4a443c;
-  --color-muted: #5c554c;
-  --color-subtle: #7a7268;
-  --color-rule: #e2ddd5;
+  /* Primary palette -- exact values from the standards. */
+  --color-navy: #0C2340;
+  --color-brand: #BD1F2D;
+  --color-gray: #C1C6C8;
 
-  /* Samford crimson, used as punctuation rather than decoration. */
-  --color-brand: #b3272d;
-  --color-brand-deep: #8f1f24;
+  /* Secondary palette -- each capped at 20% of the ratio. */
+  --color-blue-jean: #376693;
+  --color-brand-deep: #85181B;
+  --color-sky: #8CA8C9;
+  --color-dark-gray: #393D3D;
+
+  /* Working aliases. Text tints are mixes of the official navy toward white,
+     not invented hues, so nothing here leaves the sanctioned palette. */
+  --color-paper: #FFFFFF;
+  --color-ink: #0C2340;
+  --color-body: #393D3D;
+  --color-muted: #495A70;
+  --color-subtle: #798696;
+  --color-rule: #C1C6C8;
 }
 
-/* Sensible defaults so page files carry layout classes, not boilerplate. */
 @layer base {
   body {
     font-family: var(--font-sans);
     background-color: var(--color-paper);
-    color: var(--color-ink);
+    color: var(--color-body);
   }
 }

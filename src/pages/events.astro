@@ -20,10 +20,10 @@ const { upcoming, planned, past } = await groupEvents();
           <li class="flex flex-wrap items-baseline gap-x-8 gap-y-2 border-t border-rule py-7 last:border-b">
             <div class="w-20 shrink-0">
               <div class="text-xs uppercase tracking-[0.09em] text-subtle">
-                {fmt.month.format(event.data.date!)}
+                {fmt.month(event.data.date!)}
               </div>
               <div class="font-display text-3xl leading-none">
-                {fmt.day.format(event.data.date!)}
+                {fmt.day(event.data.date!)}
               </div>
             </div>
             <div class="grow">
@@ -80,7 +80,7 @@ const { upcoming, planned, past } = await groupEvents();
         {past.map((event) => (
           <li class="flex flex-wrap gap-x-6 gap-y-1 py-4 text-[15px]">
             <span class="grow">{event.data.title}</span>
-            <span class="text-subtle">{fmt.longDate.format(event.data.date!)}</span>
+            <span class="text-subtle">{fmt.longDate(event.data.date!)}</span>
           </li>
         ))}
       </ul>

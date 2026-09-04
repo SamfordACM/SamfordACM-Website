@@ -87,6 +87,30 @@ commit both together.
 4. Confirm at least two current people can log into the registrar and the
    chapter email.
 
+## Brand compliance
+
+The site follows Samford University's Brand Identity Standards (Summer 2026)
+and the Samford Style Reference Guide:
+
+- **Palette** is the official one, exact hexes, in `src/styles/global.css`.
+  Navy `#0C2340` carries the page (the standard requires 50-80% navy on
+  websites); red `#BD1F2D` is capped at 40% and used as punctuation only;
+  gray `#C1C6C8` draws the rules. Secondary colors are capped at 20% each.
+- **Type** is Georgia and Tahoma -- the substitutes the standard names for
+  Chronicle Deck and Whitney, which are licensed faces we cannot ship. They are
+  system fonts, so the site loads no webfonts.
+- **Dates and times** follow AP style per the style guide: abbreviate only
+  Jan., Feb., Aug., Sept., Oct., Nov., Dec.; "6 p.m." with no ":00"; en dashes
+  with no spaces in ranges. All of this lives in `src/lib/events.ts`.
+- **No Samford logos are used.** The bell tower and bulldog are locked marks
+  that cannot be altered or typeset, and the site does not reproduce them.
+
+**[ ] Still to do: trademark licensing.** The standards state that any person or
+organization must obtain approval and/or a license to use Samford's trademarks
+-- which include the university's *name* -- for any purpose. `samfordacm.com`
+uses "Samford" throughout. Confirm with the Office of Marketing and
+Communication (samford.edu/go/licensing) and note the approval here.
+
 ## Deliberately not built
 
 - **No self-hosted backend.** Everything is static files on GitHub Pages —
