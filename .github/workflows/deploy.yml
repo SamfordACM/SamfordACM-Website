@@ -25,7 +25,16 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-      - run: npm ci
+      # TEMPORARY: mirrors npm's failure into an annotation so the error is
+      # readable without repo admin rights. Revert to `- run: npm ci` once the
+      # install is green.
+      - name: Install dependencies
+        run: |
+          set -o pipefail
+          if ! npm ci 2>&1 | tee /tmp/npm-ci.log; then
+            echo "::error title=npm ci failed::$(tail -c 2500 /tmp/npm-ci.log | tr '\n' '~')"
+            exit 1
+          fi
       - run: npm run build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
