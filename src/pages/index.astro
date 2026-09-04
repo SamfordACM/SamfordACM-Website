@@ -5,8 +5,10 @@ import { AREAS, HERO_PHOTO } from '../lib/chapter';
 import { groupEvents, fmt, describeWhen } from '../lib/events';
 
 const { upcoming, planned } = await groupEvents();
-const nextUp = upcoming.slice(0, 3);
-const bigThings = planned.slice(0, 3);
+
+// One list, one treatment. Dated events first, then the ones still TBD --
+// mixing two different card styles was what made this section feel ragged.
+const agenda = [...upcoming, ...planned].slice(0, 4);
 ---
 
 <Base
@@ -39,7 +41,7 @@ const bigThings = planned.slice(0, 3);
       </div>
     </div>
 
-    <aside class="flex flex-col justify-end gap-5 lg:col-span-5 lg:border-l lg:border-rule lg:pl-10">
+    <aside class="flex flex-col justify-end gap-6 lg:col-span-5 lg:border-l lg:border-rule lg:pl-10">
       {HERO_PHOTO ? (
         <img
           src={path(HERO_PHOTO)}
@@ -64,16 +66,18 @@ const bigThings = planned.slice(0, 3);
       <p class="font-display text-xl italic leading-normal text-ink">
         Open to every major. There is no coding test at the door.
       </p>
-
-      <div class="border-t border-rule pt-5">
-        <h2 class="text-xs uppercase tracking-[0.09em] text-subtle">What lives here</h2>
-        <ul class="mt-3 flex flex-wrap gap-2">
-          {AREAS.map((area) => (
-            <li class="border border-rule px-3 py-1.5 text-sm text-muted">{area}</li>
-          ))}
-        </ul>
-      </div>
     </aside>
+  </section>
+
+  <section class="mt-16">
+    <h2 class="text-xs uppercase tracking-[0.09em] text-subtle">What lives here</h2>
+    <ul class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      {AREAS.map((area) => (
+        <li class="flex items-center justify-center border border-rule px-4 py-4 text-center text-sm text-muted">
+          {area}
+        </li>
+      ))}
+    </ul>
   </section>
 
   <hr class="my-16 border-rule" />
@@ -87,25 +91,35 @@ const bigThings = planned.slice(0, 3);
     </div>
 
     <div class="lg:col-span-9">
-      {nextUp.length > 0 && (
-        <ul class="mb-10">
-          {nextUp.map((event) => (
+      {agenda.length === 0 ? (
+        <p class="border-t border-rule pt-6 text-body">
+          Nothing on the calendar yet — check back soon.
+        </p>
+      ) : (
+        <ul>
+          {agenda.map((event) => (
             <li class="flex flex-wrap items-baseline gap-x-8 gap-y-2 border-t border-rule py-6 last:border-b">
               <div class="w-20 shrink-0">
                 <div class="text-xs uppercase tracking-[0.09em] text-subtle">
-                  {fmt.month.format(event.data.date!)}
+                  {event.data.date ? fmt.month.format(event.data.date) : 'Date'}
                 </div>
-                <div class="font-display text-3xl leading-none">
-                  {fmt.day.format(event.data.date!)}
-                </div>
+                <div
+                  class:list={[
+                    'font-display leading-none',
+                    event.data.date ? 'text-3xl' : 'text-3xl text-subtle',
+                  ]}
+                >{event.data.date ? fmt.day.format(event.data.date) : 'TBD'}</div>
               </div>
+
               <div class="grow">
                 <h3 class="font-display text-xl">{event.data.title}</h3>
                 <p class="mt-1 text-sm text-muted">
-                  {describeWhen(event)}
-                  {event.data.location && <> &middot; {event.data.location}</>}
+                  {event.data.date && <>{describeWhen(event)}</>}
+                  {event.data.date && event.data.location && <> &middot; </>}
+                  {event.data.location}
                 </p>
               </div>
+
               {event.data.rsvp && (
                 <a href={event.data.rsvp} class="shrink-0 text-sm text-brand hover:text-brand-deep">
                   Sign up
@@ -114,25 +128,6 @@ const bigThings = planned.slice(0, 3);
             </li>
           ))}
         </ul>
-      )}
-
-      {bigThings.length > 0 && (
-        <ul class="grid gap-px bg-rule sm:grid-cols-3">
-          {bigThings.map((event) => (
-            <li class="bg-paper py-6 sm:px-5 sm:first:pl-0">
-              <p class="text-xs uppercase tracking-[0.09em] text-subtle">
-                {event.data.window}
-              </p>
-              <h3 class="mt-2 font-display text-xl leading-snug">{event.data.title}</h3>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {nextUp.length === 0 && bigThings.length === 0 && (
-        <p class="border-t border-rule pt-6 text-body">
-          Nothing on the calendar yet — check back soon.
-        </p>
       )}
     </div>
   </section>

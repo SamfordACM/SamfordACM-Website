@@ -1,8 +1,8 @@
 ---
 import { path, normalize } from '../lib/url';
 
-// Join is deliberately not in this list -- it renders as the button at the far
-// right, so the primary action is never just another link in the row.
+// Join is deliberately not in this list -- it renders as the button after the
+// row, so the primary action is never just another link.
 const links = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
@@ -15,13 +15,14 @@ const current = normalize(Astro.url.pathname);
 ---
 
 <header class="border-b border-rule">
-  <nav class="mx-auto flex max-w-5xl flex-wrap items-center gap-x-7 gap-y-3 px-6 py-5 sm:px-10">
+  <nav class="mx-auto flex max-w-5xl flex-wrap items-center gap-x-8 gap-y-3 px-6 py-5 sm:px-10">
     <a
       href={path('/')}
       class="font-display text-xl font-semibold tracking-tight text-ink"
     >Samford <span class="text-brand">ACM</span></a>
 
-    <div class="flex flex-wrap items-center gap-x-7 gap-y-2 sm:ml-6">
+    {/* ml-auto pushes the whole nav group right; Join sits at the end of it. */}
+    <div class="ml-auto flex flex-wrap items-center gap-x-7 gap-y-2">
       {links.map(({ href, label }) => (
         <a
           href={path(href)}
@@ -39,7 +40,7 @@ const current = normalize(Astro.url.pathname);
     <a
       href={path('/join')}
       aria-current={current === '/join' ? 'page' : undefined}
-      class="ml-auto bg-brand px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-deep"
+      class="bg-brand px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-deep"
     >Join</a>
   </nav>
 </header>
