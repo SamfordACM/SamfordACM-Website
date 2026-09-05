@@ -25,7 +25,7 @@ export const PRESENCE_SIGNUP_URL =
   'https://samford.presence.io/organization/association-for-computing-machinery-acm';
 
 /** National ACM membership: encouraged for everyone, required for exec. */
-export const NATIONAL_ACM_URL = 'https://www.acm.org/membership/student';
+export const NATIONAL_ACM_URL = 'https://www.acm.org/membership/join';
 
 /**
  * What a visitor finds here. Mixes the subject areas we cover with what
