@@ -2,32 +2,62 @@
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { AREAS, ADVISOR } from '../lib/chapter';
+
+// What a member actually gets, in the order a prospective member cares about.
+const offers = [
+  {
+    title: 'A team',
+    body: 'Hackathons and competitions are far better with people beside you. Teams form here, so you never have to enter one alone.',
+  },
+  {
+    title: 'People to learn from',
+    body: 'Someone to look at your code, answer the question you have been embarrassed to ask, and tell you what they wish they had known a year earlier.',
+  },
+  {
+    title: 'Workshops',
+    body: 'Practical sessions on the tooling coursework assumes you already know, and on what you can now build with AI.',
+  },
+  {
+    title: 'Connections',
+    body: 'Introductions to internships and to people doing this work already — the part that is hardest to arrange on your own.',
+  },
+];
 ---
 
 <Base title="About">
   <PageHeader
     title="About"
-    lead="ACM is Samford's computing club — the student chapter of the Association for Computing Machinery, and the only club on campus for anything computer-related."
+    lead="ACM is the computing club at Samford — open to every student, whatever you are studying."
   />
 
   <div class="mt-12 grid gap-12 lg:grid-cols-12">
     <div class="lg:col-span-7">
       <div class="max-w-[34em] space-y-5 text-lg leading-relaxed text-body">
         <p>
-          Because we are the only computing club at Samford, we are a wide tent
-          on purpose. Cybersecurity, software engineering, computer engineering
-          — if your interest touches a computer, this is where it lives.
+          We are the Samford chapter of the Association for Computing Machinery,
+          and we are the only club on campus for anything computer-related. We
+          are not run by the computer science department, and you do not need to
+          be a computer science major to be here. Anyone at Samford can join.
         </p>
         <p>
-          We care a lot about what AI has changed. The gap between having an idea
-          and building it has never been smaller, and a big part of what we do is
-          helping people cross it without needing years of coursework first.
+          For the last few years the chapter was quiet — one hackathon, a couple
+          of events and a single trip to Shipt across an entire year. This year we
+          are rebuilding it: more events, far more consistently, and a real effort
+          to bring in people who have never thought of themselves as technical.
         </p>
         <p>
-          <!-- TODO: your own words. What made you take this on, and what you want
-               the chapter to be by the end of the year. -->
-          This year is a rebuild. Say something here about where the chapter is
-          headed — this is the paragraph people read to decide whether to show up.
+          Computing is the rare skill that compounds on top of whatever else you
+          know. It is worth having whether you intend to write software for a
+          living or never write another line after graduation, and the distance
+          between having an idea and actually building it has never been shorter
+          than it is now.
+        </p>
+        <p>
+          Samford is a Christian university, and that shapes how we want this
+          chapter to run. We want it to be a place where people are genuinely
+          looked after, where the newest member is treated as well as the most
+          experienced one, and where what we build and how we treat each other
+          both reflect Christ.
         </p>
       </div>
     </div>
@@ -46,11 +76,11 @@ import { AREAS, ADVISOR } from '../lib/chapter';
           <dd>All Samford students, any major</dd>
         </div>
         <div class="flex gap-4 border-b border-rule pb-4">
-          <dt class="w-28 shrink-0 text-subtle">Meetings</dt>
-          <dd>No fixed schedule — events are announced as they are set</dd>
+          <dt class="w-28 shrink-0 text-subtle">Events</dt>
+          <dd>At least every other week this year</dd>
         </div>
         <div class="flex gap-4">
-          <dt class="w-28 shrink-0 text-subtle">Advisor</dt>
+          <dt class="w-28 shrink-0 text-subtle">Adviser</dt>
           <dd>{ADVISOR}</dd>
         </div>
       </dl>
@@ -66,28 +96,13 @@ import { AREAS, ADVISOR } from '../lib/chapter';
     </aside>
   </div>
 
-  <h2 class="mt-16 font-display text-3xl font-normal tracking-tight">What we do</h2>
-  <div class="mt-8 grid gap-12 sm:grid-cols-3">
-    <div>
-      <h3 class="font-display text-xl font-medium">Hackathons</h3>
-      <p class="mt-2 leading-relaxed text-muted">
-        We enter them and, this year, we are hosting one at Samford. Teams form
-        here; you do not need to arrive with one.
-      </p>
-    </div>
-    <div>
-      <h3 class="font-display text-xl font-medium">Competitions</h3>
-      <p class="mt-2 leading-relaxed text-muted">
-        We enter national competitions and host our own. No technical experience
-        is required to take part.
-      </p>
-    </div>
-    <div>
-      <h3 class="font-display text-xl font-medium">Building with AI</h3>
-      <p class="mt-2 leading-relaxed text-muted">
-        Sessions on getting real things built with modern tools — aimed at people
-        with ideas, not just people with experience.
-      </p>
-    </div>
+  <h2 class="mt-16 font-display text-3xl font-normal tracking-tight">What you get</h2>
+  <div class="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+    {offers.map((item) => (
+      <div>
+        <h3 class="font-display text-xl font-medium">{item.title}</h3>
+        <p class="mt-2 leading-relaxed text-muted">{item.body}</p>
+      </div>
+    ))}
   </div>
 </Base>
