@@ -46,8 +46,6 @@ const officers = defineCollection({
     email: z.email().optional(),
     /** Path under public/, e.g. /officers/daniel-abbott.jpg */
     photo: z.string().optional(),
-    /** What they are into. Renders as tags. */
-    interests: z.array(z.string()).default([]),
     github: z.url().optional(),
     linkedin: z.url().optional(),
     website: z.url().optional(),

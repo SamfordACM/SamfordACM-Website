@@ -69,14 +69,6 @@ const profileLinks = (d: (typeof officers)[number]['data']) =>
             </div>
           )}
 
-          {officer.data.interests.length > 0 && (
-            <ul class="mt-4 flex flex-wrap gap-2">
-              {officer.data.interests.map((interest) => (
-                <li class="border border-rule px-3 py-1 text-sm text-muted">{interest}</li>
-              ))}
-            </ul>
-          )}
-
           {links.length > 0 && (
             <div class="mt-4 flex flex-wrap gap-5">
               {links.map((l) => (
